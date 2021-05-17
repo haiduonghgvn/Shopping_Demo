@@ -3,6 +3,11 @@ package com.demo.shopping.entity;
 
 import com.sun.istack.NotNull;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -18,7 +23,8 @@ import java.util.Date;
 @Component
 @Table(name = "User_Account")
 
-public class User implements Serializable {
+public class User extends Auditable<String> implements Serializable{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ID;
@@ -33,13 +39,8 @@ public class User implements Serializable {
 
     @NotNull
     @Column(name = "role", columnDefinition = "varchar(255) default 'USER'")
-    private String role;
+    private String _role;
 
-    @Column(name = "CREATED")
-    private Date _CREATED;
-
-    @Column(name = "UPDATED")
-    private Date _UPDATED;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @EqualsAndHashCode.Exclude

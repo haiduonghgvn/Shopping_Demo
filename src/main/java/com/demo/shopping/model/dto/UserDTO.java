@@ -1,10 +1,10 @@
 package com.demo.shopping.model.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.demo.shopping.entity.Auditable;
+import lombok.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 @Getter
 @Setter
@@ -18,9 +18,15 @@ public class UserDTO {
 
     private String _passwords;
 
-    private String role;
+    private String _role;
 
-    private Date _CREATED;
+    private LocalDateTime createDate;
 
-    private Date _UPDATED;
+    private LocalDateTime updateDate;
+
+    private String updateBy;
+
+    private String createBy;
+
+
 }

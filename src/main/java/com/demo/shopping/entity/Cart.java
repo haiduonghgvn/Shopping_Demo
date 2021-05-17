@@ -19,7 +19,7 @@ import java.util.Collection;
 public class Cart implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long product_id;
+    private long productId;
 
     @Column(name = "name")
     private String name;
@@ -30,21 +30,20 @@ public class Cart implements Serializable {
     @Column(name = "quality")
     private int quality;
 
-    public void ToCart(Product product){
-        this.product_id= product.getID();
+    public void toCart(Product product){
+        this.productId= product.getID();
         this.name = product.getName();
         this.price= product.getPrice();
         this.quality= 1;
     }
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    // Quan hệ n-n với đối tượng ở dưới (Person) (1 địa điểm có nhiều người ở)
-    @EqualsAndHashCode.Exclude // không sử dụng trường này trong equals và hashcode
-    @ToString.Exclude // Khoonhg sử dụng trong toString()
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
 
-    @JoinTable(name = "Order_Product", //Tạo ra một join Table tên là "address_person"
-            joinColumns = @JoinColumn(name = "order_id"),  // TRong đó, khóa ngoại chính là address_id trỏ tới class hiện tại (Address)
-            inverseJoinColumns = @JoinColumn(name = "product_id") //Khóa ngoại thứ 2 trỏ tới thuộc tính ở dưới (Person)
+    @JoinTable(name = "Order_Product",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private Collection<Product> product;
 
@@ -60,9 +59,13 @@ public class Cart implements Serializable {
         return super.hashCode();
     }
 
+    @SneakyThrows
     @Override
     public boolean equals(Object obj) {
-        return this.getProduct_id() == ((Cart) obj).getProduct_id();
+        if (obj == null) {
+            throw new NullPointerException();
+        }
+        return this.getProductId() == ((Cart) obj).getProductId();
     }
 
 }
