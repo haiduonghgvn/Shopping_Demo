@@ -9,10 +9,13 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Component
 public class UserServiceImpl implements UserService {
+
     @Autowired
     UserRepository userRepository;
+
     @Override
     public List<UserDTO> getListUser() {
         List<UserDTO> result = new ArrayList<>();
@@ -26,6 +29,5 @@ public class UserServiceImpl implements UserService {
     public User createUser(User user) {
         return userRepository.saveAndFlush(user);
     }
-
 
 }

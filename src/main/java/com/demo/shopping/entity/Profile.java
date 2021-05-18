@@ -20,24 +20,18 @@ import java.util.Date;
 @Component
 @Table(name = "Profile")
 
-public class Profile implements Serializable {
+public class Profile extends Auditable<String> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ID;
 
-    private String name;
+    private String fullName;
 
     @Column(columnDefinition = "text")
     private String address;
 
     @Column(columnDefinition = "text")
     private String email;
-
-    @Column(name = "CREATED")
-    private Date _CREATED;
-
-    @Column(name = "_UPDATED")
-    private Date _UPDATED;
 
     @Column(columnDefinition = "text")
     private String _avatar;
